@@ -116,10 +116,5 @@ def extract_info_all_patients():
 
 
 
-extract_info_all_patients()
+# extract_info_all_patients()
 # extract_info_patient("8003166895", False, True)
-
-#TODO : demande a Hugo les sous titre possible de "Examens complémentaires" et les inclures dans data_to_extract pour les variables concernées
-# (les variables qui ne cherche acutellemnt que dans Examens complémentaires et Autres examens)
-
-# TODO : hémoglobine : Valeur entre 5 et 20 g/dL. Parfois l’hémoglobine est donnée en g/L. Il faut donc diviser la valeur par 10. 
