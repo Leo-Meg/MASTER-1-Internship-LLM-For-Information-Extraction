@@ -1,0 +1,27 @@
+Start
+Intervention / Geste
+Stratégie anesthésique - Conclusion
+    Protocole anesthésique proposé
+    (Équipement et monitorage à prévoir)
+    Conclusion
+(Résumé clinique - Histoire de la maladie)
+Antécédents et allergies
+(Mode de vie)
+    (Habitus)
+Traitement en cours
+Examen clinique
+    Evaluation du patient en vue de l'anesthésie
+        Evaluation des voies aériennes supérieures
+        Evaluation des risques
+        (Aptitude à l'acte ambulatoire)
+Examens complémentaires
+    Résultats de biologie
+    (Autres examens)
+    Equipement et monitorage à prévoir
+Prescriptions à l'issue de la consultation
+    (Médicaments)
+    (Biologie)
+    (Examens de biologie)
+    (Soins infirmiers)
+(Demandes d'avis)
+Informations données au patient
