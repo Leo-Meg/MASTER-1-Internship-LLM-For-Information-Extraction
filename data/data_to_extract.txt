@@ -1,0 +1,123 @@
+- "height_cm" (int) the height of the patient, in cm. Often refered as "Taille".
+# Start, Examen clinique
+
+- "weight_kg" (float) the weight of the patient, in kg. Often refered as "Poids".
+# Start, Examen clinique
+
+- "asa_score" (int) the ASA score of the patient, it is a number between 1 and 4.
+# Start, Stratégie anesthésique - Conclusion
+
+- "is_woman" (bool) Whether or not the patient is a woman. If the patient is a woman, F should be written, M will be written otherwise.
+# Start
+
+
+
+- "PAS" (float) the "Pression Artérielle Systolique". It is the MAXIMAL arterial pressure. So, for example, if you see "PA : 144 / 68" it means that the Arterial Pressure (PA) is between 144 and 68, in which case the PAS (the maximum) will be 144.
+# Examen clinique
+
+- "PAD" (float) the "Pression Artérielle Diastolique". It is the MINIMAL arterial pressure. So, for example, if you see "PA : 144 / 68" it means that the Arterial Pressure (PA) is between 144 and 68, in which case the PAD (the minimum) will be 68.
+# Examen clinique
+
+//- "PAM" (float) the "Pression Artérielle Moyenne". If you explicitly see it written, for example : "PAM : 104", then PAM should be 104, but otherwise it should be null.
+//# Examen clinique
+
+- "FC" (int) the "Fréquence Cardiaque au repos".
+# Examen clinique
+
+- "SpO2_percentage" (float) the raw percentage value of the "Oxygen saturation".
+# Examen clinique
+
+
+
+//Similarly, if you see "Echelle de Duke : > 10 MET." then MET_superior_to_4 should be true. A last example, if you see "Echelle de Duke : < 4 MET." then MET_superior_to_4 should be false.
+//[NULLABLE]
+
+//- "MET_superior_to_4" (boolean) whether the MET is superior or equal to 4 or not. MET means "équivalents métaboliques". Should be false if not specified in the report or if MET is strictly inferior to 4. It is measured on the Duke scale, so for example, if you see "Echelle de Duke : 4 à 9 MET." then it means that the value of MET is between 4 and 9, so superior or equal to 4, MET_superior_to_4 should therefore be true. 
+//# Evaluation des risques
+
+- "HTA" (boolean) whether or not the patient has arterial hypertension. It can be labeled "hypertension artérielle", "HTA", "hypertension essentielle" or "hypertension". If you see any of those terms, then the patient has HTA. DO NOT MISTAKE with "l’HTAP (hypertension artérielle pulmonaire)", "l’hypertension oculaire" or "l’hypertension intracrânienne"
+# Antécédents médicaux
+
+- "diabetes" (boolean) whether or not the patient has diabete, can be written "diabète", "DT1", "DT2" or "diabétique".
+# Antécédents médicaux
+
+- "dyslipidemia" (boolean) whether or not the patient has Dyslipidemia, It may be refered as "Dyslipidemie" or "XXX" in the report.
+# Antécédents médicaux
+
+- "smoking" (boolean) whether or not the patient is smoking, can be written "tabagisme", "tabac" or "fumeur".
+# Evaluation des risques, Habitus, Antécédents médicaux
+
+- "IMC" (float) the body mass index of the patient. It should be refered as IMC, for "Indice de Masse Corporelle". For example if you see "IMC : 27.9 kg/m2" then the value of BMI should be 27.9
+# Start
+
+- "cardiopathie_rythmique" (boolean) whether or not the patient has a "Cardiopathie rythmique", can be designated by : "fibrillation atriale", "FA", "ACFA", "tachycardie ventriculaire", "tachycardie jonctionnelle" or "cardiopathie rythmique".
+# Antécédents médicaux, Examens complémentaires, Autres examens
+
+- "coronaropathie" (boolean) whether or not the patient has a "Coronaropathie", can be designated by : "coronaropathie", "insuffisance coronaire", "infarctus du myocarde", "angor", "pontage aorto-coronarien", "stemi" or "nstemi".
+# Antécédents médicaux, Antécédents chirurgicaux
+
+- "cardiopathie_valvulaire" (boolean)  whether or not the patient has a "Cardiopathie valvulaire". It can be designated by : "insuffisance mitrale", "IM", "insuffisance aortique", "IA", "IAo", "rétrécissement mitral", "RM", "rétrécissement aortique", "RA", "RAo", "RAC", "valvulopathie". Be carefull, it is sometimes written "PAS d'IM", "PAS de valvulopathie", etc. in which case, the value should be false. 
+# Antécédents médicaux, Examens complémentaires, Autres examens
+
+- "cardiopathie_hypertrophique" (boolean) whether ot not the patient has "Cardiopathie hypertrophique". 
+# Antécédents médicaux, Examens complémentaires, Autres examens
+
+- "AOMI" (boolean) whether ot not the patient has "AOMI", can be written "artériopathie oblitérante" or simply "AOMI".
+# Antécédents médicaux
+
+- "insuffisance_renale_chronique" (boolean) whether ot not the patient has an "insuffisance rénale chronique". It can be written "insuffisance rénale chronique", or "IRC", or "maladie rénale chronique", or "MRC".  
+# Antécédents médicaux
+
+- "temp_DFG" (float) the DFG of the patient. For example if you see "DFG calculé par MDR" or "DFG calculé par C…" it is that.
+# Examens de biologie, Biologie, Résultats de biologie
+
+- "temp_FEVG" (float) the FEVG of the patient, in percentage.
+# Autres examens, Antécédents médicaux
+
+- "insuffisance_cardiaque" (boolean) whether ot not the patient has an "insuffisance cardiaque". It can be written "insuffisance cardiaque", "IC".
+# Antécédents médicaux, Examens complémentaires, Autres examens
+
+- "lee_score" (int) varies between 1 and 6 or can be null. It is often refered as "lee" or "lee score".
+# Evaluation des risques
+
+- "ultrasound" (boolean) whether or not an ultrasound scanning was made, should be true if an "échographie cardiaque", "ETT", "échographie trans-thoracique" or "écho-cœur" was made.
+# Autres examens, Antécédents médicaux
+
+
+
+
+- "alcoholism" (boolean) whether or not the patient is an alcoholic. It can be written "alcoolisme", "OH régulier ", "OH chronique", "intoxication éthylique", "exogénose". Is also considered alcoholic any patient who drinks more than 2 glasses a day (example : "3 verres de vin par jour" or "1 bière et 2 whiskies par jour"). ATTENTION : do NOT consider as alcoholic "OH occasionnel" or "alcoolisme occasionnel"
+# Evaluation des risques, Habitus, Antécédents médicaux
+
+- "toxicomanie" (boolean) whether ot not the patient regularly consumes toxic substances.
+# Evaluation des risques, Habitus, Antécédents médicaux
+
+
+
+
+- "hemoglobin" (float) generally labeled "Hb" or "hémoglobine". It is often specified under "Résultats de biologie". For example, "Hb 7.1" means that "hemoglobin" is 7.1.
+# Résultats de biologie
+
+- "albuminemie" (float) generally labeled "albuminémie", "albumine",  "albu", "alb" or "albumine plasmatique".
+# Résultats de biologie
+
+- "protidemie" (float) generally labeled "protidémie", "protides" or "prot".
+# Résultats de biologie
+
+- "uremie" (float) the uremie value of the patient. if present, it should be labeled "urée".
+# Résultats de biologie
+
+- "creatininemie" (float) generally labeled "créatininémie", "créatinine" or "créat". It is often specified under "Résultats de biologie". For exampe, "Crea 87" or "Creat 87" means that "creatininemie" is 87. DO NOT mistake with "creatine kinase"
+# Résultats de biologie
+
+- "stroke" (boolean) whether or not the patient has had an "accident vasculaire cérébral" can be written as "AVC", "accident vasculaire cérébral", "HIP", "hématome cérébral" or "hématome intraparenchymateux".
+# Antécédents médicaux, Evaluation des risques
+
+- "HTIC" (boolean) whether or not the patient has "HTIC", can be written "HTIC" or "hypertension intracrânienne".
+# Antécédents médicaux, Evaluation des risques
+
+- "migraine" (boolean) whether or not the patient has migraines, can be writtent "migraine", "migraineuse" or "migraineux".
+# Antécédents médicaux, Evaluation des risques
+
+- "SAOS" (boolean) whether or not the patient has "SAOS", can be written "apnée(s) du sommeil" or simply "SAOS".
+# Antécédents médicaux, Evaluation des risques
