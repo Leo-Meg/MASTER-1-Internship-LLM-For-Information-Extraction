@@ -94,6 +94,7 @@ Below is a step-by-step explanation of the pipeline:
 
 ---
 
+<a name="step0"></a>
 ### **Step 0 – PDF Parsing & Text Extraction**
 
 **Scripts:** utils/utils_parsing.py:get_pdf_content()`
@@ -108,7 +109,7 @@ Below is a step-by-step explanation of the pipeline:
 4. Clean text is saved as `{patient_id}.txt`.
 
 ---
-
+<a name="step1"></a>
 ### **Step 1 – Report Structuring**
 
 **Scripts:** `utils/utils_parsing.py:clip_report()` & `utils/utils_parsing.py:extract_one_part_from_report()`
@@ -119,7 +120,7 @@ Below is a step-by-step explanation of the pipeline:
 **Process:** Report titles are used to delimit report sections, ensuring that LLM queries are restricted to relevant context only.
 
 ---
-
+<a name="step2"></a>
 ### **Step 2 – Variable Definition & Target Sections**
 
 **File:** `data/data_to_extract.txt`
@@ -133,7 +134,7 @@ Below is a step-by-step explanation of the pipeline:
 This mapping guides the pipeline in identifying which sections to pass to the LLM for each variable.
 
 ---
-
+<a name="step3"></a>
 ### **Step 3 – Information Extraction via LLM**
 
 **Scripts:** `pdf_extractor.py:make_big_requests()` & `utils/utils_llm.py:request_llm()`
@@ -150,7 +151,7 @@ This mapping guides the pipeline in identifying which sections to pass to the LL
 
 
 ---
-
+<a name="step4"></a>
 ### **Step 4 – Post-Processing & JSON Export**
 
 **Scripts:** `utils/utils_json.py:combine_jsons()` & `utils/utils_json.py:post_extraction()` & `utils/utils_IO.py:write_jsonstr_to_file()`
