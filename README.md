@@ -189,5 +189,5 @@ This script compares each generated JSON against a reference file in tests/expec
 
 
 ```text
-Megret L., 2025. Information extraction from anesthesia reports using a Large Language Model. Département de recherche en anesthésie, Hôpital Laribroisière
+Megret L., 2024. Information extraction from anesthesia reports using a Large Language Model. Département de recherche en anesthésie, Hôpital Laribroisière
 ```
