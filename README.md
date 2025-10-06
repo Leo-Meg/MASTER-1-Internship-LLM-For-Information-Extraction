@@ -109,8 +109,10 @@ Below is a step-by-step explanation of the pipeline:
 ### **Step 1 – Report Structuring**
 
 **Scripts:** `utils/utils_parsing.py:clip_report()` & `utils/utils_parsing.py:extract_one_part_from_report()`
+
 **Input:** Text reports (`data/text/*.txt`) & Section titles (`data/report_titles.txt`)
 **Output:** Clipped report segments corresponding to key sections (e.g., *Examen clinique*, *Antécédents médicaux*).
+
 **Process:** Report titles are used to delimit report sections, ensuring that LLM queries are restricted to relevant context only.
 
 ---
@@ -118,7 +120,8 @@ Below is a step-by-step explanation of the pipeline:
 ### **Step 2 – Variable Definition & Target Sections**
 
 **File:** `data/data_to_extract.txt`
-**Purpose:** Defines the variables to extract and their associated report sections. 
+**Purpose:** Defines the variables to extract and their associated report sections.
+
 **Format Example:**
 ```text
 - "asa_score" (int) the ASA score of the patient.
@@ -131,8 +134,10 @@ This mapping guides the pipeline in identifying which sections to pass to the LL
 ### **Step 3 – Information Extraction via LLM**
 
 **Scripts:** `pdf_extractor.py:make_big_requests()` & `utils/utils_llm.py:request_llm()`
+
 **Input:** Clipped text segment & Variable definition (name, type, nullability, description)
 **Output:** Intermediate JSON files with variable-value pairs
+
 **Process:**
 1. Build a JSON-formatted prompt for each variable.
 2. Send it to the local LLM endpoint via HTTP POST.
@@ -140,25 +145,12 @@ This mapping guides the pipeline in identifying which sections to pass to the LL
 4. Store the result temporarily.
 5. Run multiple extractions in parallel using `joblib.Parallel`.
 
-**Example request:**
-
-```bash
-POST http://bigpu:8000/generate
-{
-  "prompt": "<anesthesia report extract...>",
-  "max_tokens": 2048
-}
-```
 
 ---
 
 ### **Step 4 – Post-Processing & JSON Export**
 
-**Scripts:**
-
-* `utils/utils_json.py:combine_jsons()`
-* `utils/utils_json.py:post_extraction()`
-* `utils/utils_IO.py:write_jsonstr_to_file()`
+**Scripts:** `utils/utils_json.py:combine_jsons()` & `utils/utils_json.py:post_extraction()` & `utils/utils_IO.py:write_jsonstr_to_file()`
 
 **Output:**
 
@@ -167,11 +159,7 @@ POST http://bigpu:8000/generate
 **Process:**
 
 1. Merge regex-based and LLM-based variables.
-2. Compute derived values:
-
-   * `IMC_calc` (BMI)
-   * `PAM_calc` (Mean Arterial Pressure)
-   * Boolean indicators (`insuffisance_cardiaque`, `insuffisance_renale_chronique`, `is_obese_calc`)
+2. Compute derived values.
 3. Write formatted JSON for each patient.
 
 
