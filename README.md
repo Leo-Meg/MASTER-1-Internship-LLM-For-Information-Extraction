@@ -1,5 +1,8 @@
 # MASTER-1-Internship-LLM-For-Information-Extraction
 
+
+This work comes from my Master 1 internship at Lariboisière Hospital in the Department of Anesthesiology and Intensive Care with computer scientists from INSERM. This project was created with Maximilien Charmetant, who was also an intern.
+
 ## Table of Contents
 1. [Project Overview](#overview)
 2. [Folder Layout](#layout)
