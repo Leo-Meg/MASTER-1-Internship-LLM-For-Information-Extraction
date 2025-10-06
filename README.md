@@ -1,5 +1,41 @@
 # MASTER-1-Internship-LLM-For-Information-Extraction
 
+## Table of Contents
+1. [Project Overview](#overview)
+2. [Folder Layout](#layout)
+3. [Prerequisites](#prereq)
+4. [Installation](#install)
+5. [Execution Pipeline](#pipeline)  
+   - [Step 0 – PDF Parsing & Text Extraction](#step0)  
+   - [Step 1 – Report Structuring](#step1)  
+   - [Step 2 – Variable Definition & Target Sections](#step2)  
+   - [Step 3 – Information Extraction via LLM](#step3)  
+   - [Step 4 – Post-Processing & JSON Export](#step4)  
+6. [Generated Artefacts](#artefacts)
+7. [Testing & Validation](#tests)
+
+---
+
+<a name="overview"></a>
+## 1. Project Overview
+
+This project automates **information extraction from anesthesia reports** using a **Large Language Model (LLM)** deployed locally (endpoint: `http://bigpu:8000/generate`).  
+It processes raw PDF reports, segments them into structured sections, and extracts predefined clinical variables (e.g., ASA score, hypertension, BMI, biological measures).  
+
+The system:
+- Converts PDFs to text.
+- Uses section titles to delimit report parts (e.g., “Examen clinique”, “Antécédents médicaux”).
+- Extracts variables defined in `data/data_to_extract.txt`.
+- Sends targeted prompts to the LLM for each variable.
+- Validates and combines results into structured JSON files per patient.
+
+---
+
+<a name="layout"></a>
+## 2. Folder Layout
+
+
+
 # Download the necessary tools
 
 ```sh
