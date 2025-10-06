@@ -71,7 +71,6 @@ sudo dnf install poppler-utils
 Python dependencies:
 
 ```sh
-sudo dnf install poppler-utils
 
 pip install joblib
 
