@@ -34,6 +34,26 @@ The system:
 <a name="layout"></a>
 ## 2. Folder Layout
 
+MASTER-1-Internship-LLM-For-Information-Extraction/
+│
+├── data/
+│   ├── pdfs/                 # Input PDFs (raw anesthesia reports)
+│   ├── text/                 # Text extracted from PDFs
+│   ├── report_titles.txt     # Section titles used to clip reports
+│   ├── data_to_extract.txt   # Variables to extract (definitions + section mapping)
+│
+├── tests/
+│   ├── test_suite.py         # Pytest suite comparing extracted vs expected outputs
+│   ├── expected_output/      # Reference JSONs (expected results)
+│   └── jsons_extracted/      # Generated JSONs after extraction
+│
+├── utils/
+│   ├── utils_IO.py           # File I/O helpers (read/write JSON/text)
+│   ├── utils_json.py         # JSON merging and post-processing (BMI, PAM, etc.)
+│   ├── utils_llm.py          # LLM request formatting, validation, retries
+│   └── utils_parsing.py      # PDF parsing, section clipping, regex-based pre-extraction
+│
+└── pdf_extractor.py          # Main pipeline launcher
 
 
 # Download the necessary tools
