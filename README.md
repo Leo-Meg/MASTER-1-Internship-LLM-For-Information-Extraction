@@ -93,20 +93,10 @@ Below is a step-by-step explanation of the pipeline:
 
 ### **Step 0 – PDF Parsing & Text Extraction**
 
-**Scripts:**
-
-* `utils/utils_parsing.py:get_pdf_content()`
-
-**Input:**
-
-* PDF files from `data/pdfs/`
-
-**Output:**
-
-* Cleaned text files stored in `data/text/`
-
+**Scripts:** utils/utils_parsing.py:get_pdf_content()`
+**Input:** PDF files from `data/pdfs/`
+**Output:** Cleaned text files stored in `data/text/`
 **Process:**
-
 1. Each PDF is parsed using `pypdf.PdfReader`.
 2. Tables and numeric data are reformatted for readability.
 3. Redundant newlines and footers are removed.
@@ -116,63 +106,32 @@ Below is a step-by-step explanation of the pipeline:
 
 ### **Step 1 – Report Structuring**
 
-**Scripts:**
-
-* `utils/utils_parsing.py:clip_report()`
-* `utils/utils_parsing.py:extract_one_part_from_report()`
-
-**Input:**
-
-* Text reports (`data/text/*.txt`)
-* Section titles (`data/report_titles.txt`)
-
-**Output:**
-
-* Clipped report segments corresponding to key sections (e.g., *Examen clinique*, *Antécédents médicaux*).
-
-**Process:**
-Report titles are used to delimit report sections, ensuring that LLM queries are restricted to relevant context only.
+**Scripts:** `utils/utils_parsing.py:clip_report()` & `utils/utils_parsing.py:extract_one_part_from_report()`
+**Input:** Text reports (`data/text/*.txt`) & Section titles (`data/report_titles.txt`)
+**Output:** Clipped report segments corresponding to key sections (e.g., *Examen clinique*, *Antécédents médicaux*).
+**Process:** Report titles are used to delimit report sections, ensuring that LLM queries are restricted to relevant context only.
 
 ---
 
 ### **Step 2 – Variable Definition & Target Sections**
 
-**File:**
-
-* `data/data_to_extract.txt`
-
-**Purpose:**
-Defines the variables to extract and their associated report sections.
-
+**File:** `data/data_to_extract.txt`
+**Purpose:** Defines the variables to extract and their associated report sections. 
 **Format Example:**
-
 ```text
 - "asa_score" (int) the ASA score of the patient.
 # Start, Stratégie anesthésique - Conclusion
 ```
-
 This mapping guides the pipeline in identifying which sections to pass to the LLM for each variable.
 
 ---
 
 ### **Step 3 – Information Extraction via LLM**
 
-**Scripts:**
-
-* `pdf_extractor.py:make_big_requests()`
-* `utils/utils_llm.py:request_llm()`
-
-**Input:**
-
-* Clipped text segment
-* Variable definition (name, type, nullability, description)
-
-**Output:**
-
-* Intermediate JSON files with variable-value pairs
-
+**Scripts:** `pdf_extractor.py:make_big_requests()` & `utils/utils_llm.py:request_llm()`
+**Input:** Clipped text segment & Variable definition (name, type, nullability, description)
+**Output:** Intermediate JSON files with variable-value pairs
 **Process:**
-
 1. Build a JSON-formatted prompt for each variable.
 2. Send it to the local LLM endpoint via HTTP POST.
 3. Parse and validate the LLM's JSON response.
