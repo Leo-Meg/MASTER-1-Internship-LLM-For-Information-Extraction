@@ -76,8 +76,11 @@ pip install joblib
 pip install -U pytest
 ```
 
+<a name="pipeline"></a>
 
-# Launch extraction
+4. Execution Pipeline
+
+Launch the full extraction process:
 
 ```sh
 python pdf_extractor.py
@@ -85,31 +88,128 @@ python pdf_extractor.py
 
 This will parse all the pdfs in **data/pdfs/**, make calls to the llm on http://bigpu:8000/generate and extract the variables found in **data/data_to_extract.txt** into **tests/jsons_extracted/**
 
+Below is a step-by-step explanation of the pipeline:
 
-# Project structure
+---
 
-- **data/**
-    - **data/pdfs**
-        - contains the raw anesthesia report pdfs
-    - **data/text**
-        - contains the text extracted from the pdfs
-    - **data/report_titles.txt**
-        - all the titles possible in the anesthesia report
-        - this file is used by the extractor to delimit the parts of the report
-    - **data/data_to_extract.txt**
-        - contains the variables that we want to extract from the reports
+### **Step 0 – PDF Parsing & Text Extraction**
 
-- **tests**
-    - **tests/test_suite.py**
-        - the test suite
-    - **tests/expected_output/**
-        - the expected jsons after the pdf extraction
-    - **tests/jsons_extracted/**
-        - the actual jsons extracted
+**Scripts:**
 
-- **utils/**
-    - contains the functions necessary to pdf_extractor.py
+* `utils/utils_parsing.py:get_pdf_content()`
 
-- **pdf_extractor.py**
-    - the root script
-    - launch it to extract all data from all patients
+**Input:**
+
+* PDF files from `data/pdfs/`
+
+**Output:**
+
+* Cleaned text files stored in `data/text/`
+
+**Process:**
+
+1. Each PDF is parsed using `pypdf.PdfReader`.
+2. Tables and numeric data are reformatted for readability.
+3. Redundant newlines and footers are removed.
+4. Clean text is saved as `{patient_id}.txt`.
+
+---
+
+### **Step 1 – Report Structuring**
+
+**Scripts:**
+
+* `utils/utils_parsing.py:clip_report()`
+* `utils/utils_parsing.py:extract_one_part_from_report()`
+
+**Input:**
+
+* Text reports (`data/text/*.txt`)
+* Section titles (`data/report_titles.txt`)
+
+**Output:**
+
+* Clipped report segments corresponding to key sections (e.g., *Examen clinique*, *Antécédents médicaux*).
+
+**Process:**
+Report titles are used to delimit report sections, ensuring that LLM queries are restricted to relevant context only.
+
+---
+
+### **Step 2 – Variable Definition & Target Sections**
+
+**File:**
+
+* `data/data_to_extract.txt`
+
+**Purpose:**
+Defines the variables to extract and their associated report sections.
+
+**Format Example:**
+
+```text
+- "asa_score" (int) the ASA score of the patient.
+# Start, Stratégie anesthésique - Conclusion
+```
+
+This mapping guides the pipeline in identifying which sections to pass to the LLM for each variable.
+
+---
+
+### **Step 3 – Information Extraction via LLM**
+
+**Scripts:**
+
+* `pdf_extractor.py:make_big_requests()`
+* `utils/utils_llm.py:request_llm()`
+
+**Input:**
+
+* Clipped text segment
+* Variable definition (name, type, nullability, description)
+
+**Output:**
+
+* Intermediate JSON files with variable-value pairs
+
+**Process:**
+
+1. Build a JSON-formatted prompt for each variable.
+2. Send it to the local LLM endpoint via HTTP POST.
+3. Parse and validate the LLM's JSON response.
+4. Store the result temporarily.
+5. Run multiple extractions in parallel using `joblib.Parallel`.
+
+**Example request:**
+
+```bash
+POST http://bigpu:8000/generate
+{
+  "prompt": "<anesthesia report extract...>",
+  "max_tokens": 2048
+}
+```
+
+---
+
+### **Step 4 – Post-Processing & JSON Export**
+
+**Scripts:**
+
+* `utils/utils_json.py:combine_jsons()`
+* `utils/utils_json.py:post_extraction()`
+* `utils/utils_IO.py:write_jsonstr_to_file()`
+
+**Output:**
+
+* Final structured JSON files stored in `tests/jsons_extracted/`
+
+**Process:**
+
+1. Merge regex-based and LLM-based variables.
+2. Compute derived values:
+
+   * `IMC_calc` (BMI)
+   * `PAM_calc` (Mean Arterial Pressure)
+   * Boolean indicators (`insuffisance_cardiaque`, `insuffisance_renale_chronique`, `is_obese_calc`)
+3. Write formatted JSON for each patient.
