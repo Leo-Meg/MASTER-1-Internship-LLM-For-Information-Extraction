@@ -57,7 +57,18 @@ MASTER-1-Internship-LLM-For-Information-Extraction/
 └── pdf_extractor.py          # Main pipeline launcher
 ```
 
-# Download the necessary tools
+---
+
+<a name="prereq"></a>
+## 3. Prerequisites
+
+System dependencies:
+```bash
+sudo dnf install poppler-utils
+```
+
+
+Python dependencies:
 
 ```sh
 sudo dnf install poppler-utils
