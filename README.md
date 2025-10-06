@@ -94,8 +94,10 @@ Below is a step-by-step explanation of the pipeline:
 ### **Step 0 – PDF Parsing & Text Extraction**
 
 **Scripts:** utils/utils_parsing.py:get_pdf_content()`
+
 **Input:** PDF files from `data/pdfs/`
 **Output:** Cleaned text files stored in `data/text/`
+
 **Process:**
 1. Each PDF is parsed using `pypdf.PdfReader`.
 2. Tables and numeric data are reformatted for readability.
