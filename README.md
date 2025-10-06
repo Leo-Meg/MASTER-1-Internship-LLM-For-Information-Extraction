@@ -4,15 +4,14 @@
 1. [Project Overview](#overview)
 2. [Folder Layout](#layout)
 3. [Prerequisites](#prereq)
-4. [Installation](#install)
-5. [Execution Pipeline](#pipeline)  
+4. [Execution Pipeline](#pipeline)  
    - [Step 0 – PDF Parsing & Text Extraction](#step0)  
    - [Step 1 – Report Structuring](#step1)  
    - [Step 2 – Variable Definition & Target Sections](#step2)  
    - [Step 3 – Information Extraction via LLM](#step3)  
    - [Step 4 – Post-Processing & JSON Export](#step4)  
-6. [Generated Artefacts](#artefacts)
-7. [Testing & Validation](#tests)
+5. [Generated Artefacts](#artefacts)
+6. [Testing & Validation](#tests)
 
 ---
 
