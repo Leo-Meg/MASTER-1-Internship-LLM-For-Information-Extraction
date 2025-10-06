@@ -212,3 +212,30 @@ POST http://bigpu:8000/generate
    * `PAM_calc` (Mean Arterial Pressure)
    * Boolean indicators (`insuffisance_cardiaque`, `insuffisance_renale_chronique`, `is_obese_calc`)
 3. Write formatted JSON for each patient.
+
+
+<a name="artefacts"></a>
+## 5. Generated Artefacts
+```
+| File                                        | Description                                          |
+| ------------------------------------------- | ---------------------------------------------------- |
+| `data/text/{id}.txt`                        | Cleaned textual report extracted from PDF            |
+| `tests/jsons_extracted/extracted_{id}.json` | Final JSON output with all extracted variables       |
+| `tests/expected_output/{id}.json`           | Reference output for validation                      |
+| `logs/` (optional)                          | Console logs during extraction (if `print_log=True`) |
+```
+Each JSON file contains structured key/value pairs ready for downstream analysis.
+
+<a name="tests"></a>
+## 6. Testing & Validation
+
+You can validate extraction accuracy using the included test suite:
+```
+pytest tests/test_suite.py
+```
+This script compares each generated JSON against a reference file in tests/expected_output/ and reports: *missing or extra keys* and *value mismatches*.
+
+
+```text
+Megret L., 2025. Information extraction from anesthesia reports using a Large Language Model. Département de recherche en anesthésie, Hôpital Laribroisière
+```
