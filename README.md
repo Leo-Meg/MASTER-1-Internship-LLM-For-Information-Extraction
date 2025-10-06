@@ -34,6 +34,7 @@ The system:
 <a name="layout"></a>
 ## 2. Folder Layout
 
+```
 MASTER-1-Internship-LLM-For-Information-Extraction/
 │
 ├── data/
@@ -54,7 +55,7 @@ MASTER-1-Internship-LLM-For-Information-Extraction/
 │   └── utils_parsing.py      # PDF parsing, section clipping, regex-based pre-extraction
 │
 └── pdf_extractor.py          # Main pipeline launcher
-
+```
 
 # Download the necessary tools
 
