@@ -77,7 +77,7 @@ pip install -U pytest
 ```
 
 <a name="pipeline"></a>
-4. Execution Pipeline
+## 4. Execution Pipeline
 
 Launch the full extraction process:
 
